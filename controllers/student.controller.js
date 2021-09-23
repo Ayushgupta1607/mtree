@@ -73,13 +73,12 @@ router.delete("/removeRecord/", async (req, res) => {
 
 router.patch("/editRecord", async (req, res) => {
   const id = req.query.id;
-  let student;
-  await Student.findById(id, (err, result) => {
-    if (err) res.status(400).json({ err: "record not found" });
-    else {
-      student = result;
-    }
-  });
+  console.log(id);
+  let student = await Student.findOne({ _id: id });
+  if (!student) {
+    res.status(400).json({ err: "not found" });
+  }
+  console.log(student, "student");
   student.name = req.body.name || student.name;
   student.sub1 = req.body.sub1 || student.sub1;
   student.sub2 = req.body.sub2 || student.sub2;
@@ -88,8 +87,9 @@ router.patch("/editRecord", async (req, res) => {
   student.sub5 = req.body.sub5 || student.sub5;
   student.total =
     student.sub1 + student.sub2 + student.sub3 + student.sub4 + student.sub5;
-  student.percentage = student.total / 500;
+  student.percentage = student.total / 5;
   student.result = req.body.percentage < 33 ? "Fail" : "Pass";
+  console.log(student);
   await Student.updateOne({ _id: id }, student, (err, result) => {
     if (err) {
       console.log("something went wring");
