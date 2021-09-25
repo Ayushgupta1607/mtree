@@ -68,7 +68,7 @@ export const userDetails = expressAsyncHandler(async (req, res) => {
   const id = req.user.id;
   const user = await User.findById(id);
   if (!user) throw new Error("Something Went Wrong");
-
+  console.log(user);
   res.json({
     data: {
       id: user._id,

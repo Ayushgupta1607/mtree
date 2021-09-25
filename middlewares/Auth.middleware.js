@@ -19,7 +19,7 @@ export const auth = async (req, res, next) => {
       if (!validated) {
         throw new Error("Unauthorized");
       }
-      req.user = { id: decoded.id, email: decoded.email };
+      req.user = { id: decoded.id, role: validated.role, email: decoded.email };
       next();
     } else {
       throw new Error("Unauthorized");

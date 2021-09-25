@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import studentRoute from "./controllers/student.controller.js";
 import routes from "./startup/routes.js";
 // const bodyParser=require('body-parser');
 const app = express();
