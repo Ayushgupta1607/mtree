@@ -14,11 +14,11 @@ const productSchema = new mongoose.Schema({
   },
   qty_sold: {
     type: Number,
-    required: true,
     default: 0,
   },
   qlty_avl_status: {
     type: String,
+    default: 0,
   },
   category: {
     type: String,

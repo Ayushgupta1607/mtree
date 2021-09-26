@@ -4,20 +4,23 @@ export const addProduct = expressAsyncHandler(async (req, res) => {
   if (req.user.role != 1) {
     throw new Error("Access Denied");
   }
+  console.log(req.body);
   const image = req.body.image;
+  console.log(image);
   const name = req.body.name;
   const qty_avl = req.body.qty_avl;
   const qlty_avl_status = req.body.qlty_avl_status;
   const category = req.body.category;
   const price = req.body.price;
   const product = await new Product({
-    image: image,
+    productImage: image,
     name: name,
     qty_avl: qty_avl,
     qlty_avl_status: qlty_avl_status,
     category: category,
     price: price,
   });
+  console.log(product);
 
   try {
     await product.save();
@@ -37,7 +40,7 @@ export const editProduct = expressAsyncHandler(async (req, res) => {
   if (!product) {
     throw new Error("Product doesn't exist");
   }
-  product.image = req.body.image || product.image;
+  product.productImage = req.body.image || product.productImage;
   product.name = req.body.name || product.name;
   product.qty_avl = req.body.qty_avl || product.qty_avl;
   product.qty_sold = req.body.qty_sold || product.qty_sold;
